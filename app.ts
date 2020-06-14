@@ -18,32 +18,33 @@
 // 5.Rich Configuration Option
 // 6.Modern tooling that helps even in non - TypeScript Projects
 
+// Official TypeScript Docs: https://www.typescriptlang.org/docs/handbook/basic-types.html
+
 // ----------------------------------------------------------------------------------------------------------------------- //
 //Core Types
 
 // 1.number   1,3.14,-10       All number no differentiation between float or decimal
 // 2.string  "Hi",'Hi',`Hi`    All text value
 // 3.boolean  true,false
-// To be continued ... 
+// To be continued ...
 function add(n1: number, n2: number, showResult: boolean, phrase: string) {
-    // if (typeof n1 !== 'number' || typeof n2 !== 'number') {
-    //   throw new Error('Incorrect input!');
-    // }
-    const result = n1 + n2;
-    if (showResult) {
-        console.log(phrase + result);
-    } else {
-        return result;
-    }
+  // if (typeof n1 !== 'number' || typeof n2 !== 'number') {
+  //   throw new Error('Incorrect input!');
+  // }
+  const result = n1 + n2;
+  if (showResult) {
+    console.log(phrase + result);
+  } else {
+    return result;
+  }
 }
 
 const number1 = 5; // 5.0
 const number2 = 2.8;
 const printResult = true;
-const resultPhrase = 'Result is: ';
+const resultPhrase = "Result is: ";
 
 add(number1, number2, printResult, resultPhrase);
-
 
 // In TypeScript, you work with types like string or number.
 // Important: It is string and number(etc.), NOT String, Number etc.
@@ -56,9 +57,9 @@ add(number1, number2, printResult, resultPhrase);
 //   age: number;
 // } = {
 const person = {
-    name: 'Jack',
-    age: 30,
-    hobbies: ['Sports', 'Cooking'] // Array
+  name: "Jack",
+  age: 30,
+  hobbies: ["Sports", "Cooking"], // Array
 };
 
 console.log(person.name);
@@ -66,27 +67,27 @@ console.log(person.name);
 // 5. Array  [1,2,3]   Any JavaScript array, type can be flexible or strict (regarding the element types)
 
 let favoriteActivities: string[];
-favoriteActivities = ['Sports'];
+favoriteActivities = ["Sports"];
 
 console.log(person.name);
 
 for (const hobby of person.hobbies) {
-    console.log(hobby.toUpperCase());
-    // console.log(hobby.map()); // !!! ERROR !!!
+  console.log(hobby.toUpperCase());
+  // console.log(hobby.map()); // !!! ERROR !!!
 }
 
-//c6. Tuple  [1,2]   Added by TypeScript Fixed Length Array
+//6. Tuple  [1,2]   Added by TypeScript Fixed Length Array
 
 const person1: {
-    name: string;
-    age: number;
-    hobbies: string[];
-    role: [number, string];
+  name: string;
+  age: number;
+  hobbies: string[];
+  role: [number, string];
 } = {
-    name: 'Maximilian',
-    age: 30,
-    hobbies: ['Sports', 'Cooking'],
-    role: [2, 'author'] // Tuple
+  name: "Maximilian",
+  age: 30,
+  hobbies: ["Sports", "Cooking"],
+  role: [2, "author"], // Tuple
 };
 
 // person1.role.push('admin');
@@ -94,19 +95,23 @@ const person1: {
 
 // person1.role = [0, 'admin', 'user'];
 
-// 7. Enum     enum { NEW, OLD }    Added by TypeScript: Automatically enumerated global constant identifiers 
+// 7. Enum     enum { NEW, OLD }    Added by TypeScript: Automatically enumerated global constant identifiers
 
-enum Role { ADMIN = 'ADMIN', READ_ONLY = 100, AUTHOR = 'AUTHOR' };
+enum Role {
+  ADMIN = "ADMIN",
+  READ_ONLY = 100,
+  AUTHOR = "AUTHOR",
+}
 
 const person2 = {
-    name: 'Maximilian',
-    age: 30,
-    hobbies: ['Sports', 'Cooking'],
-    role: Role.ADMIN
+  name: "Maximilian",
+  age: 30,
+  hobbies: ["Sports", "Cooking"],
+  role: Role.ADMIN,
 };
 
 if (person2.role === Role.AUTHOR) {
-    console.log('is author');
+  console.log("is author");
 }
 
 // 8. Any *    Any kind of value, no specific type assignment
@@ -122,50 +127,126 @@ console.log(activities);
 // 9. Union Types |  combine and use any number of types to accept as Input
 
 function combine(input1: number | string, input2: number | string) {
-    let result;
-    if (typeof input1 === 'number' && typeof input2 === 'number') {
-        result = input1 + input2;
-    } else {
-        result = input1.toString() + input2.toString();
-    }
-    return result;
+  let result;
+  if (typeof input1 === "number" && typeof input2 === "number") {
+    result = input1 + input2;
+  } else {
+    result = input1.toString() + input2.toString();
+  }
+  return result;
 }
 
 const combinedAges = combine(26, 27);
 console.log(combinedAges);
 
-const combinedNames = combine('Alice', 'Bob');
+const combinedNames = combine("Alice", "Bob");
 console.log(combinedNames);
-
 
 // 10. Literal Types
 
 function combine1(
-    input1: number | string,
-    input2: number | string,
-    resultConversion: 'as-number' | 'as-text' // Literal
+  input1: number | string,
+  input2: number | string,
+  resultConversion: "as-number" | "as-text" // Literal
 ) {
-    let result;
-    if (typeof input1 === 'number' && typeof input2 === 'number' || resultConversion === 'as-number') {
-        result = +input1 + +input2;
-    } else {
-        result = input1.toString() + input2.toString();
-    }
-    return result;
-    // if (resultConversion === 'as-number') {
-    //   return +result;
-    // } else {
-    //   return result.toString();
-    // }
+  let result;
+  if (
+    (typeof input1 === "number" && typeof input2 === "number") ||
+    resultConversion === "as-number"
+  ) {
+    result = +input1 + +input2;
+  } else {
+    result = input1.toString() + input2.toString();
+  }
+  return result;
+  // if (resultConversion === 'as-number') {
+  //   return +result;
+  // } else {
+  //   return result.toString();
+  // }
 }
 
-const combinedAges1 = combine1(30, 26, 'as-number');
+const combinedAges1 = combine1(30, 26, "as-number");
 console.log(combinedAges);
 
-const combinedStringAges = combine1('30', '26', 'as-number');
+const combinedStringAges = combine1("26", "27", "as-number");
 console.log(combinedStringAges);
 
-const combinedNames1 = combine1('Max', 'Anna', 'as-text');
+const combinedNames1 = combine1("Alice", "Bob", "as-text");
 console.log(combinedNames);
 
+// 11. Type Aliases and Custom Types
 
+type Combinable = number | string;
+type ConversionDescriptor = "as-number" | "as-text";
+
+function combine2(
+  input1: Combinable,
+  input2: Combinable,
+  resultConversion: ConversionDescriptor
+) {
+  let result;
+  if (
+    (typeof input1 === "number" && typeof input2 === "number") ||
+    resultConversion === "as-number"
+  ) {
+    result = +input1 + +input2;
+  } else {
+    result = input1.toString() + input2.toString();
+  }
+  return result;
+}
+
+const combinedStringAges1 = combine1("26", "27", "as-number");
+console.log(combinedStringAges1);
+
+//12. Function as Types
+
+function addition(n1: number, n2: number) {
+  return n1 + n2;
+}
+
+function printOutput(num: number): void {
+  console.log("Result: " + num);
+}
+
+printOutput(addition(5, 12));
+
+let combineValues: (a: number, b: number) => number;
+
+combineValues = addition;
+// combineValues = printOutput;
+// combineValues = 5;
+
+console.log(combineValues(8, 8));
+
+// let someValue: undefined;
+
+// 13. Function Types and Callback
+
+function addAndHandle(n1: number, n2: number, cb: (num: number) => void) {
+  const result = n1 + n2;
+  cb(result);
+}
+
+addAndHandle(10, 20, (result) => {
+  console.log(result);
+});
+
+// 14. unknown and never Types
+
+let userInput: unknown;
+let userName: string;
+
+userInput = 5;
+userInput = "Max";
+if (typeof userInput === "string") {
+  userName = userInput;
+}
+
+function generateError(message: string, code: number): never {
+  throw { message: message, errorCode: code };
+  // while (true) {}
+}
+
+generateError("An error occurred!", 500);
